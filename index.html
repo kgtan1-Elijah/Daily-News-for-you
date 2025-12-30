@@ -31,7 +31,7 @@
         .subtitle {
             font-size: 1.3em;
             color: #7f8c8d;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
         .date {
             font-size: 1.2em;
@@ -51,7 +51,7 @@
             color: white;
             text-decoration: none;
             transition: all 0.3s;
-            cursor: pointer;
+            display: block;
         }
         .part-card:hover {
             transform: translateY(-10px);
@@ -88,24 +88,16 @@
             color: #7f8c8d;
             font-size: 1.1em;
         }
-        .instructions {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 40px;
-            text-align: left;
-        }
-        .instructions h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-        .instructions ol {
-            margin-left: 20px;
-            line-height: 1.8;
-        }
-        .instructions li {
-            margin: 10px 0;
-            color: #34495e;
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .container {
+                padding: 30px;
+            }
+            .parts {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -116,54 +108,23 @@
         <div class="date">Sunday, December 29, 2025</div>
         
         <div class="parts">
-            <div class="part-card policy" onclick="alert('To use: Save this and the other two parts as HTML files, then link them together. See instructions below.')">
+            <a href="part1-policy.html" class="part-card policy">
                 <h2>Part 1</h2>
                 <h3>Policy Focus News</h3>
                 <p>Breaking news, Singapore policy developments, ASEAN regional updates, East Asia news, and business coverage</p>
                 <div class="time">⏱️ 35-40 minutes</div>
-            </div>
+            </a>
             
-            <div class="part-card" onclick="alert('To use: Save this and the other two parts as HTML files, then link them together. See instructions below.')">
+            <a href="part2-lifestyle.html" class="part-card">
                 <h2>Part 2</h2>
                 <h3>Lifestyle & Technology</h3>
                 <p>Sports scores, entertainment news, Microsoft & Power BI updates, AI developments, data analytics, and video tutorials</p>
                 <div class="time">⏱️ 20-30 minutes</div>
-            </div>
+            </a>
         </div>
         
         <div class="footer-note">
-            Total reading time: 55-70 minutes
-        </div>
-
-        <div class="instructions">
-            <h3>📋 How to Use These Files:</h3>
-            <ol>
-                <li><strong>Download all 3 artifacts:</strong>
-                    <ul>
-                        <li>This landing page (index.html)</li>
-                        <li>Part 1: Policy Focus News</li>
-                        <li>Part 2: Lifestyle & Technology</li>
-                    </ul>
-                </li>
-                <li><strong>Save them on your computer:</strong>
-                    <ul>
-                        <li>Click the artifact</li>
-                        <li>Click the three dots (⋮) in top right</li>
-                        <li>Select "View code"</li>
-                        <li>Copy all the HTML code</li>
-                        <li>Save as .html files (index.html, part1-policy.html, part2-lifestyle.html)</li>
-                    </ul>
-                </li>
-                <li><strong>Upload to GitHub:</strong>
-                    <ul>
-                        <li>Create free account at github.com</li>
-                        <li>Create new repository</li>
-                        <li>Upload all 3 .html files</li>
-                        <li>Enable GitHub Pages in Settings</li>
-                        <li>Your website is live!</li>
-                    </ul>
-                </li>
-            </ol>
+            Total reading time: 55-70 minutes • Updated daily
         </div>
     </div>
 </body>
