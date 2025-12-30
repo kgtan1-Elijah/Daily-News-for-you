@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 2: Lifestyle and Technology News</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .part-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 25px;
+            border-radius: 25px;
+            display: inline-block;
+            margin: 10px 0;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        
+        .header .date {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin: 15px 0;
+        }
+        
+        .header .meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 0.95em;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 30px;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            color: white;
+        }
+        
+        .section-header h2 {
+            font-size: 1.6em;
+            flex: 1;
+        }
+        
+        .section-header .time {
+            font-size: 0.9em;
+            opacity: 0.9;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+        }
+        
+        .story {
+            background: #f8f9fa;
+            padding: 22px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            border-left: 5px solid #9b59b6;
+            transition: all 0.3s;
+        }
+        
+        .story:hover {
+            transform: translateX(8px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+        
+        .story-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .story-badge {
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 0.75em;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: #9b59b6;
+            color: white;
+        }
+        
+        .story h3 {
+            font-size: 1.35em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            flex: 1;
+            line-height: 1.3;
+        }
+        
+        .story-meta {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 12px;
+        }
+        
+        .story-content {
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+        
+        .story-content p {
+            margin-bottom: 12px;
+        }
+        
+        .story-content ul {
+            margin: 12px 0 12px 25px;
+        }
+        
+        .story-content li {
+            margin: 6px 0;
+        }
+        
+        .story-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #9b59b6;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #8e44ad;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+        
+        .sports-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+        
+        .sports-table th,
+        .sports-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .sports-table th {
+            background: #34495e;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .sports-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .score {
+            font-weight: 700;
+            font-size: 1.1em;
+            color: #e74c3c;
+        }
+        
+        .video-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            margin: 0;
+        }
+        
+        .video-section h2 {
+            margin-bottom: 25px;
+            font-size: 2em;
+            text-align: center;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .video-card {
+            background: #34495e;
+            padding: 25px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-8px);
+            background: #3d5166;
+            border-color: #9b59b6;
+        }
+        
+        .video-card h3 {
+            margin-bottom: 12px;
+            font-size: 1.3em;
+            color: #ecf0f1;
+        }
+        
+        .video-meta {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+        
+        .video-description {
+            margin-bottom: 15px;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .footer h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        
+        .footer p {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #9b59b6;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📰 Your Morning Edition</h1>
+            <div class="part-badge">PART 2: LIFESTYLE AND TECHNOLOGY NEWS</div>
+            <div class="date">Saturday, 28 December 2025 • Continued</div>
+            <div class="meta">
+                <span>⏱️ Part 2: 20-30 minutes</span>
+                <span>📚 9 stories + 3 videos</span>
+                <span>🌐 English</span>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Sports Section -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>⚽ Sports - Football</h2>
+                    <span class="time">3 min</span>
+                </div>
+
+                <div class="story">
+                    <h3 style="margin-bottom: 20px;">English Premier League - Match Results (December 27, 2025)</h3>
+                    <table class="sports-table">
+                        <thead>
+                            <tr>
+                                <th>Home Team</th>
+                                <th>Score</th>
+                                <th>Away Team</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Liverpool</td>
+                                <td class="score">3 - 1</td>
+                                <td>Leicester City</td>
+                                <td>FT</td>
+                            </tr>
+                            <tr>
+                                <td>Manchester City</td>
+                                <td class="score">2 - 2</td>
+                                <td>Everton</td>
+                                <td>FT</td>
+                            </tr>
+                            <tr>
+                                <td>Arsenal</td>
+                                <td class="score">4 - 0</td>
+                                <td>Ipswich Town</td>
+                                <td>FT</td>
+                            </tr>
+                            <tr>
+                                <td>Chelsea</td>
+                                <td class="score">1 - 2</td>
+                                <td>Fulham</td>
+                                <td>FT</td>
+                            </tr>
+                            <tr>
+                                <td>Newcastle United</td>
+                                <td class="score">3 - 0</td>
+                                <td>Aston Villa</td>
+                                <td>FT</td>
+                            </tr>
+                            <tr>
+                                <td>Nottingham Forest</td>
+                                <td class="score">1 - 1</td>
+                                <td>Tottenham</td>
+                                <td>FT</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="margin: 25px 0 15px 0;">Top Scorers - European Leagues</h3>
+                    <table class="sports-table">
+                        <thead>
+                            <tr>
+                                <th>League</th>
+                                <th>Player</th>
+                                <th>Team</th>
+                                <th>Goals</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>La Liga (Spain)</strong></td>
+                                <td>Robert Lewandowski</td>
+                                <td>Barcelona</td>
+                                <td class="score">18</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Serie A (Italy)</strong></td>
+                                <td>Lautaro Martínez</td>
+                                <td>Inter Milan</td>
+                                <td class="score">16</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bundesliga (Germany)</strong></td>
+                                <td>Harry Kane</td>
+                                <td>Bayern Munich</td>
+                                <td class="score">20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Entertainment Section -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>🎭 Entertainment</h2>
+                    <span class="time">3 min</span>
+                </div>
+
+                <div class="story">
+                    <div class="story-header">
+                        <span class="story-badge">🇸🇬 LOCAL</span>
+                        <h3>JJ Lin Announces Singapore Concert Residency 2025</h3>
+                    </div>
+                    <div class="story-meta">8 Days • 6 hours ago • English</div>
+                    <div class="story-content">
+                        <p>Singapore's beloved singer-songwriter JJ Lin (林俊杰) announced an ambitious 10-show residency at the National Stadium from June to August 2025, marking his largest hometown concert series to date.</p>
+                        <p><strong>Concert Details:</strong> "Sanctuary World Tour - Singapore Edition" will feature new production with 360-degree stage, holographic effects, and live orchestra. Each show accommodates 55,000 fans. Tickets from $128 to $498, on sale January 10.</p>
+                        <p>Lin teased new album release coinciding with residency, his first in 3 years. Fans anticipate mix of classics and fresh material. Early ticket demand expected to crash booking sites based on his 2022 concert sell-out in 15 minutes.</p>
+                    </div>
+                    <div class="story-actions">
+                        <button class="btn btn-primary">Ticket Info</button>
+                        <button class="btn btn-secondary">Share</button>
+                    </div>
+                </div>
+
+                <div class="story">
+                    <div class="story-header">
+                        <span class="story-badge">🇭🇰 HONG KONG</span>
+                        <h3>Andy Lau's New Film Breaks HK Box Office Records</h3>
+                    </div>
+                    <div class="story-meta">South China Morning Post • 8 hours ago • English</div>
+                    <div class="story-content">
+                        <p>Andy Lau's (刘德华) latest action thriller "The Last Stand" earned HK$52 million in opening weekend, becoming Hong Kong's highest-grossing opening since pandemic. The film, directed by Dante Lam, sees 62-year-old Lau performing his own stunts.</p>
+                        <p><strong>Critical Reception:</strong> Critics praise Lau's dedication and the film's intense choreography. Co-starring Simon Yam and Sammi Cheng. Already secured distribution in 15 countries including Singapore premiere January 18.</p>
+                        <p>Lau's enduring appeal demonstrated - spanning 40-year career remains top draw. Film industry sees this as positive signal for Hong Kong cinema revival post-pandemic slump.</p>
+                    </div>
+                    <div class="story-actions">
+                        <button class="btn btn-primary">Watch Trailer</button>
+                        <button class="btn btn-secondary">Cinema Times (SG)</button>
+                    </div>
+                </div>
+
+                <div class="story">
+                    <div class="story-header">
+                        <span class="story-badge">🇹🇼 TAIWAN</span>
+                        <h3>Jay Chou Collaborates with Spotify for AI Music Project</h3>
+                    </div>
+                    <div class="story-meta">Taipei Times • 7 hours ago • English</div>
+                    <div class="story-content">
+                        <p>Pop icon Jay Chou (周杰伦) partnered with Spotify on groundbreaking AI music experiment allowing fans to create personalized remixes of his classic songs using AI tools while respecting copyright protections.</p>
+                        <p><strong>Innovation:</strong> "JayChou AI Studio" lets users select instruments, tempo, and style variations of 20 hit songs. All creations remain non-commercial, shareable on platform only. Chou maintains creative oversight and revenue sharing from plays.</p>
+                        <p>Project addresses AI music debates - finding balance between fan engagement and artist rights. Chou: "Technology should enhance, not replace, human creativity." Beta launches February for Spotify Premium users in Asia.</p>
+                    </div>
+                    <div class="story-actions">
+                        <button class="btn btn-primary">Project Details</button>
+                        <button class="btn btn-secondary">Save</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Microsoft Products -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>💻 Microsoft Products</h2>
+                    <span class="time">2 min</span>
+                </div>
+
+                <div class="story">
+                    <div class="story-header">
+                        <span class="story-badge">⭐ NEW</span>
+                        <h3>Microsoft 365 Copilot Gets Major Enterprise Updates</h3>
+                    </div>
+                    <div class="story-meta">Microsoft Blog • 5 hours ago • English</div>
+                    <div class="story-content">
+                        <p>Microsoft announced significant enhancements to Copilot for Microsoft 365, focusing on enterprise productivity and data security for 2025 rollout.</p>
+                        <p><strong>Key Updates:</strong></p>
+                        <ul>
+                            <li><strong>Advanced Excel Integration:</strong> Natural language data analysis, automated report generation, predictive modeling capabilities</li>
+                            <li><strong>Teams Meeting Summaries:</strong> AI-generated action items with automatic task assignment to relevant team members</li>
+                            <li><strong>Outlook Priority Intelligence:</strong> Smart email categorization and response suggestions based on context and urgency</li>
+                            <li><strong>PowerPoint Designer Pro:</strong> AI-generated slide decks from document outlines or meeting notes</li>
+                            <li><strong>Enhanced Security:</strong> On-premise deployment options for sensitive industries, improved data governance controls</li>
+                        </ul>
+                        <p><strong>Availability:</strong> Rolling out to Enterprise E5 licenses January 2025, E3 by March. Pricing remains $30/user/month add-on.</p>
+                        <p>Early adopters report 30% productivity gains in document creation and 45% reduction in meeting follow-up time.</p>
+                    </div>
+                    <div class="story-actions">
+                        <button class="btn btn-primary">Full Feature List</button>
+                        <button class="btn btn-secondary">Request Demo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Power BI -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>📊 Power BI News</h2>
+                    <span class="time">2 min</span>
+                </div>
+
+                <div class="story">
+                    <div class="story-header">
+                        <span class="story-badge">⭐ NEW</span>
+                        <h3>Power BI December 2025 Update: Real-Time Collaboration Features</h3>
+                    </div>
+                    <div class="story-meta">Power BI Blog • 4 hours ago • English</div>
+                    <div class="story-content">
+                        <p>Microsoft Power BI's December update introduces game-changing real-time collaboration features, addressing top user requests from enterprise clients.</p>
+                        <p><strong>Major Features:</strong></p>
+                        <ul>
+                            <li><strong>Live Co-Editing:</strong> Multiple users can now edit same report simultaneously with live cursors and change tracking (like Google Docs)</li>
+                            <li><strong>AI-Powered Insights Panel:</strong> Automatic detection of data anomalies, trends, and correlations with natural language explanations</li>
+                            <li><strong>Enhanced Mobile Experience:</strong> Full report editing capabilities on iPad and Android tablets, offline sync improvements</li>
+                            <li><strong>Python Integration Expansion:</strong> Direct Python script execution in dataflows, scikit-learn and TensorFlow library support</li>
+                            <li><strong>New Visual: Sankey Diagram Pro:</strong> Enhanced flow visualization with drill-through and custom color mapping</li>
+                        </ul>
+                        <p><strong>Performance:</strong> 40% faster refresh times for large datasets (10M+ rows), improved DirectQuery optimization.</p>
+                        <p><strong>Deployment:</strong> Available now via Power BI Desktop auto-update. Service deployment complete by January 5, 2025.</p>
+                    </div>
+                    <div class="story-actions">
+                        <button class="btn btn-primary">Download Update</button>
+                        <button class="btn btn-secondary">Video Walkthrough</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Development -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>🤖 AI Development & Applications</h2>
+                    <span class="time">5 min</span>
+                </div>
+
+                <div class="story">
+                    <div class="story-header">
+                        <span class="story-badge">⭐ NEW</span>
+                        <h3>OpenAI Releases GPT-4.5: Multimodal Reasoning Breakthrough</h3>
+                    </div>
+                    <div class="story-meta">TechCrunch • 3 hours ago • English</div>
+                    <div class="story-content">
+                        <p>OpenAI unveiled GPT-4.5, claiming significant advances in multimodal reasoning, longer context windows, and reduced hallucinations. Model represents 18 months of development since GPT-4.</p>
+                        <p><strong>Key Improvements:</strong></p>
+                        <ul>
+                            <li><strong>Context Window:</strong> Expanded to 500,000 tokens (from 128k) - equivalent to 600-page book</li>
+                            <li><strong>Multimodal Integration:</strong> Seamless processing of text, images, audio, and video in single prompt. Can "watch" videos and provide timestamped analysis</li>
+                            <li><strong>Reasoning Enhancement:</strong> New "Chain-of-Thought Pro" mode shows step-by-step logical reasoning, reducing errors by 60%</li>
+                            <li><strong>Specialized Models:</strong> GPT-4.5-Turbo (faster, cost-effective), GPT-4.5-Code (optimized for programming), GPT-4.5-Science (enhanced STEM capabilities)</li>
+                            <li><strong>API Improvements:</strong> Function calling v2 with better parameter handling, structured output guarantees</li>
+                        </ul>
+                        <p><strong>Pricing:</strong> $15 per 1M input tokens, $60 per 1M output tokens. Available via ChatGPT Plus ($25/month) and API immediately.</p>
+                        <p><strong>Competition Response:</strong> Anthropic, Google, and Meta expected to announce competing models Q1 2025. AI arms race intensifies.</p>
+                    </div>
+                    <div class="story-actions">
+                        <button class="btn btn-primary">Technical Paper</button>
+                        <button class="btn btn-secondary">Try GPT-4.5</button>
+                        <button class="btn btn-secondary">Track This</button>
+                    </div>
+                </div>
+
+                <div class="story">
+                    <div class="story-header">
+                        <span class="story-badge">⭐ NEW</span>
+                        <h3>Singapore AI Startup Raises $50M for Healthcare Diagnostics</h3>
+                    </div>
+                    <div class="story-meta">e27 • 6 hours ago • English</div>
+                    <div class="story-content">
+                        <p>Local AI healthtech startup Aesculap.ai secured $50 million Series B funding led by Sequoia Capital, with participation from Temasek Holdings. Company develops AI diagnostic tools for early cancer detection.</p>
+                        <p><strong>Technology:</strong> Proprietary AI models analyze medical imaging (CT, MRI, X-ray) with 95% accuracy in detecting lung, breast, and colorectal cancers at Stage 1. Deployed in 15 Singapore hospitals including SGH, NUH, TTSH.</p>
+                        <p><strong>Expansion Plans:</strong> Funding will support regulatory approvals in US (FDA), Europe (CE Mark), and expansion across ASEAN. Hiring 100 engineers and data scientists in Singapore.</p>
+                        <p>CEO Dr. Tan Wei Ming: "Singapore positioned to lead AI healthcare innovation globally. Strong regulatory framework and world-class medical infrastructure ideal for validation."</p>
+                    </div>
+                    <div class="story-actions">
+                        <button class="btn btn-primary">Company Profile</button>
+                        <button class="btn btn-secondary">Save</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Analytics -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>📈 Data Analytics</h2>
+                    <span class="time">2 min</span>
+                </div>
+
+                <div class="story">
+                    <div class="story-header">
+                        <span class="story-badge">⭐ NEW</span>
+                        <h3>Snowflake Announces Native Python Support and AI Features</h3>
+                    </div>
+                    <div class="story-meta">Snowflake Blog • 5 hours ago • English</div>
+                    <div class="story-content">
+                        <p>Data cloud platform Snowflake unveiled major updates including native Python execution, integrated ML capabilities, and partnership with Anthropic for Claude AI integration.</p>
+                        <p><strong>Key Announcements:</strong></p>
+                        <ul>
+                            <li><strong>Snowpark Python Native:</strong> Execute Python code directly in Snowflake without external compute - pandas, scikit-learn, TensorFlow supported natively</li>
+                            <li><strong>Cortex AI:</strong> Built-in LLM functions for text analysis, sentiment detection, summarization using Claude, GPT-4, and custom models</li>
+                            <li><strong>Streamlit in Snowflake:</strong> Build and deploy data apps entirely within platform, no separate hosting needed</li>
+                            <li><strong>Enhanced Governance:</strong> Column-level data classification, automated PII detection, compliance reporting for GDPR/PDPA</li>
+                        </ul>
+                        <p><strong>Impact for Data Teams:</strong> Reduces need for external tools, streamlines ML workflows. Early customers report 50% reduction in data engineering overhead.</p>
+                        <p><strong>Availability:</strong> Rolling out globally through January 2025. Pricing integrated into existing compute costs.</p>
+                    </div>
+                    <div class="story-actions">
+                        <button class="btn btn-primary">Documentation</button>
+                        <button class="btn btn-secondary">Webinar Signup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Section -->
+        <div class="video-section">
+            <h2>📺 Today's Video Recommendations (Watch Later)</h2>
+            <p style="text-align: center; margin-bottom: 30px; opacity: 0.9;">
+                Curated tutorials and insights for your professional development • Total: ~22 minutes
+            </p>
+
+            <div class="video-grid">
+                <div class="video-card">
+                    <h3>🎓 Power BI Tutorial</h3>
+                    <div class="video-meta">📹 8 minutes • Microsoft Learn</div>
+                    <div class="video-description">
+                        <strong>"Live Co-Editing in Power BI: Complete Guide"</strong><br><br>
+                        Learn how to use the new real-time collaboration features released in December 2025. Covers setup, best practices, and troubleshooting common issues. Includes hands-on demo with sample dataset.
+                    </div>
+                    <div class="story-actions">
+                        <button class="btn btn-primary">Watch Now</button>
+                        <button class="btn btn-secondary">Queue for Later</button>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <h3>🎓 AI Tools Tutorial</h3>
+                    <div class="video-meta">📹 7 minutes • AI Explained</div>
+                    <div class="video-description">
+                        <strong>"GPT-4.5 vs GPT-4: What's Actually New?"</strong><br><br>
+                        Practical comparison of GPT-4.5's new features with side-by-side demos. Focus on multimodal capabilities, reasoning improvements, and API changes. Includes cost analysis and use case recommendations.
+                    </div>
+                    <div class="story-actions">
+                        <button class="btn btn-primary">Watch Now</button>
+                        <button class="btn btn-secondary">Queue for Later</button>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <h3>🎥 AI Development News</h3>
+                    <div class="video-meta">📹 7 minutes • TechCrunch</div>
+                    <div class="video-description">
+                        <strong>"OpenAI GPT-4.5 Launch: Expert Analysis"</strong><br><br>
+                        Industry experts discuss implications of GPT-4.5 release for enterprise AI adoption, competitive landscape analysis, and predictions for 2025. Features interviews with AI researchers and product managers.
+                    </div>
+                    <div class="story-actions">
+                        <button class="btn btn-primary">Watch Now</button>
+                        
